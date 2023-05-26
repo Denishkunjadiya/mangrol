@@ -30,6 +30,7 @@ const EditDistrict = () => {
         let data = {
             _id: parms.id
         }
+
         const result = await api(`master/district/view`, data)
 
         if (result && result.status === 200) {

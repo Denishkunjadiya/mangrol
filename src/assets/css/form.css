@@ -1,0 +1,13 @@
+.updateForm input {
+  outline: none;
+  background: transparent;
+  border: 0;
+  padding: 10px;
+  margin: 10px 0;
+  border-bottom: 2px solid #dee2e6;
+  width: 100%;
+  transition: 0.5s;
+}
+.updateForm input:focus {
+  border-bottom: 3px solid #37e8ff;
+}/*# sourceMappingURL=form.css.map */

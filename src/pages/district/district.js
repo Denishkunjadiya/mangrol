@@ -15,19 +15,6 @@ const District = () => {
     useEffect(() => { showDistrict() }, [])
 
 
-    // --------------delete
-
-    const deleteDistrict = async (id) => {
-        const data = {
-            _id: id
-        }
-        let result = await api(`master/district/delete`, data)
-        if (result && result.status === 200) {
-
-        } else {
-            console.log("error")
-        }
-    }
 
     return (
         <div>

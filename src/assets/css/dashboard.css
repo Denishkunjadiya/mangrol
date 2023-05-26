@@ -1,0 +1,20 @@
+.Count_container .box {
+  border: 2px solid #efefef;
+  box-shadow: 0 0 2px 2px #efefef;
+  border-radius: 10px;
+}
+
+.Count_container p {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+span {
+  font-size: 2em;
+}
+
+.row_card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}/*# sourceMappingURL=dashboard.css.map */
