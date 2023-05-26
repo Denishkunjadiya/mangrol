@@ -1,0 +1,42 @@
+@import url('./assets/css/dashboard.scss');
+@import url('./assets/css/login.scss');
+@import url('./assets/css/sidebar.scss');
+@import url('./assets/css/table.scss');
+@import url('./assets/css/form.scss');
+
+.logo {
+  height: 3em;
+}
+
+
+
+body {
+  background: whitesmoke;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  max-width: 960px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* ------------ */
+
+input[type=text],
+input[type=number],
+input[type=date],
+input[type=password],
+textarea {
+
+  &.error {
+    border: 1px solid red !important;
+    background-color: rgba($color: red, $alpha: 0.1);
+  }
+}
+
+select {
+  &.error {
+    border: 1px solid red !important;
+  }
+}
