@@ -2,11 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { Link } from 'react-router-dom'
 import Button from '../../component/button'
+import Pagination from '../../component/pagination'
 
 import * as luIcon from "react-icons/lu";
 import * as biIcon from "react-icons/bi";
 
 const District = () => {
+
+    let quePar = new URLSearchParams(window.location.search);
+    let param = quePar.get('page_no')
+    let iniPage = parseInt(param)
+
+    const [tRecord, setTRecord] = useState(0)
+    let [recPerPage, setRecPerPage] = useState(5)
+    const [cPage, setCpage] = useState(!!iniPage ? iniPage : 1)
+
+    let pageCount = Math.ceil(tRecord / recPerPage)
 
     const [district, setDistrict] = useState([])
     let [sortBy, setSortBy] = useState('')
@@ -15,8 +26,13 @@ const District = () => {
     let [name, setName] = useState('')
     let [status, setStatus] = useState('')
 
-    const showDistrict = async () => {
+
+    const showDistrict = async (pageNo) => {
+        console.log(pageNo)
+
         let data = {
+            skip_number: (pageNo - 1) * recPerPage,
+            record_per_page: recPerPage,
             sort_by: sortBy,
             sort_type: sortType,
             name: name,
@@ -24,10 +40,26 @@ const District = () => {
         }
 
         let result = await api('master/district/', data)
-        setDistrict(result?.data?.data)
+        if (result && result.status === 200) {
+            if (result?.data?.total_records) {
+                setTRecord(result?.data?.total_records)
+            }
+            setDistrict(result?.data?.data)
+        }
     }
 
-    useEffect(() => { showDistrict() }, [])
+    useEffect(() => {
+        setCpage(cPage)
+        showDistrict(!!param ? param : 1)
+    }, [recPerPage])
+
+    // ----------------- page Change
+
+    const pageChange = async (page) => {
+        let cPage = page.selected + 1;
+        showDistrict(cPage)
+        window.history.replaceState({}, '', window.location.pathname + '?page_no=' + cPage)
+    }
 
     // ----------- status
 
@@ -109,7 +141,7 @@ const District = () => {
                     })}
                 </tbody>
             </table>
-
+            <Pagination pageChange={pageChange} pageCount={pageCount} cPage={cPage} setRecordPerPage={setRecPerPage} recordPerPage={recPerPage} />
 
         </div>
     )

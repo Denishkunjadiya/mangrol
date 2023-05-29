@@ -320,5 +320,10 @@ a:hover {
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid cyan;
-    object-fit: contain;
+
+    >img {
+        height: 10em;
+        width: 10em;
+    }
+
 }

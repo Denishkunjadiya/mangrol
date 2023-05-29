@@ -31,7 +31,7 @@ const NavLeft = () => {
                 </div>
 
                 <div className="nav_img">
-                    <img src={require('../../assets/img/User/comments-2.jpg')} alt="Logo" />
+                    <img src={require('../../assets/img/User/person_4.jpg')} alt="" />
                 </div>
                 <div className="nav_name">
                     <h4>Brian Hughes</h4>
