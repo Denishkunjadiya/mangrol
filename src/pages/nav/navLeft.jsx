@@ -39,7 +39,7 @@ const NavLeft = () => {
 
                 <ul className='menu'>
                     <li><Link to='/'><span><riIcon.RiDashboard3Fill /> </span>Dashboard</Link></li>
-                    <li><Link to='/district'><span></span>District</Link></li>
+                    <li><Link to='/district'><span><faIcon.FaShieldAlt /></span>District</Link></li>
 
 
                     <li><Link to='/company'><span><bsIcon.BsFillBuildingsFill /> </span>Company</Link></li>
