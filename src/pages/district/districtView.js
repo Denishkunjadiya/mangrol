@@ -51,9 +51,27 @@ const DistrictView = () => {
             </div>
 
             <div className='w-100 d-flex justify-content-center '>
-                <div className="card w-50 text-center rounded-4 ">
-                    <h1>Distric Name</h1>
-                    <h2>{district.name} </h2>
+                <div className="card w-50 overflow-hidden text-center rounded-4 ">
+                    <h1 >Distric Name</h1>
+                    <div className="row justify-content-center">
+                        <div className="col-5 border-bottom text-capitalize" >
+                            <h3> district Name</h3>
+                        </div>
+                        <div className="col-5 border-bottom">
+                            <h3>{district.name} </h3>
+                        </div>
+                    </div>
+
+                    <div className="row justify-content-center" >
+                        <div className="col-5 text-capitalize">
+                            <h3> district Status</h3>
+                        </div>
+                        <div className="col-5 align-items-center d-flex justify-content-center">
+                            <p className='fs-2 m-0 '>
+                                {district.status === true ? <i style={{ color: "#00b30c" }} className="fa-solid fa-circle-check"></i> : <i className="fa-solid fa-circle-xmark" style={{ color: "#ff0000", }} ></i>}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
