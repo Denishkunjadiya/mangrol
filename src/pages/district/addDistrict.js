@@ -7,10 +7,11 @@ import Joi from 'joi';
 const AddDistrict = () => {
 
     const [district, setDistrict] = useState()
+    let [error, setError] = useState({})
 
     const validate = (data) => {
         const schema = Joi.object({
-            name: Joi.string().max(50).required(),
+            district: Joi.string().max(50).required().label('name')
         });
         return schema.validate(data, { abortEarly: false, allowUnknown: true });
     };
@@ -19,13 +20,14 @@ const AddDistrict = () => {
         resetError();
         e.preventDefault()
 
-        const data = { name: district }
+        const data = {
+            name: district
+        }
 
         const { error } = validate(data)
         if (error) showError(error.details);
 
         let result = await api('master/district/add', data)
-
         setDistrict('')
     }
 
@@ -52,7 +54,8 @@ const AddDistrict = () => {
                 <div className="row  px-3 ">
                     <div className="col-md-6 ">
                         <label for="formGroupExampleInput" className="fs-4 mt-sm-2 mt-md-0 ">*District</label>
-                        <input value={district} onChange={(e) => setDistrict(e.target.value)} placeholder='Enter District Name' type="text" />
+                        <input id='district' value={district} onChange={(e) => setDistrict(e.target.value)} placeholder='Enter District Name' type="text" />
+                        {error?.name && <span className='error'>{error['name']}</span>}
                     </div>
                 </div>
 

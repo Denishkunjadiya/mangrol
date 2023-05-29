@@ -15,7 +15,7 @@ const District = () => {
 
     const [tRecord, setTRecord] = useState(0)
     let [recPerPage, setRecPerPage] = useState(5)
-    const [cPage, setCpage] = useState(!!iniPage ? iniPage : 1)
+    const [cPage, setCpage] = useState(!iniPage ? iniPage : 1)
 
     let pageCount = Math.ceil(tRecord / recPerPage)
 
@@ -28,7 +28,6 @@ const District = () => {
 
 
     const showDistrict = async (pageNo) => {
-        console.log(pageNo)
 
         let data = {
             skip_number: (pageNo - 1) * recPerPage,
@@ -50,7 +49,7 @@ const District = () => {
 
     useEffect(() => {
         setCpage(cPage)
-        showDistrict(!!param ? param : 1)
+        showDistrict(!param ? param : 1)
     }, [recPerPage])
 
     // ----------------- page Change
@@ -110,7 +109,7 @@ const District = () => {
 
     return (
         <div>
-            <div className="admin_page_top">
+            <div className="admin_page_top " >
                 <h2>District</h2>
                 <Button link='/addDistrict' iHeight='15px' class='btn-primary' icon={<i class="fa-solid fa-plus"></i>} name='Add' />
             </div>
@@ -142,7 +141,6 @@ const District = () => {
                 </tbody>
             </table>
             <Pagination pageChange={pageChange} pageCount={pageCount} cPage={cPage} setRecordPerPage={setRecPerPage} recordPerPage={recPerPage} />
-
         </div>
     )
 }
