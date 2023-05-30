@@ -8,7 +8,7 @@ const Dashboard = () => {
     const [zone, setZone] = useState([])
     const [businessType, setBusinessType] = useState([])
     const [powerSupply, setPowerSupply] = useState([])
-    const [association, setAssociation] = useState([])
+    const [user, setUser] = useState([])
     const [member, setMember] = useState([])
 
 
@@ -49,10 +49,10 @@ const Dashboard = () => {
 
     // ------------------- Association
 
-    const showAssociation = async () => {
-        const result = await api('association/get_taluka_list')
-        // console.log(result)
-        // setAssociation(result?.data?.total_records)
+    const showUser = async () => {
+        const result = await api('user/')
+        console.log(result)
+        setUser(result?.data?.total_records)
     }
 
     // ------------------- member
@@ -70,7 +70,7 @@ const Dashboard = () => {
         showZone();
         showbusinessType();
         showpowerSupply();
-        // showAssociation();
+        showUser();
         showMember();
     }, [])
 
@@ -100,8 +100,8 @@ const Dashboard = () => {
                         <span className="span text-center">{powerSupply}</span>
                     </div>
                     <div className="col-lg-3 col-md-5 text-capitalize overflow-hidden py-3 m-3 box">
-                        <p className="text-left ">association</p>
-                        <span className="span text-center"> null </span>
+                        <p className="text-left ">User</p>
+                        <span className="span text-center"> {user} </span>
                     </div>
                     <div className="col-lg-3 col-md-5 text-capitalize overflow-hidden py-3 m-3 box">
                         <p className="text-left ">member</p>

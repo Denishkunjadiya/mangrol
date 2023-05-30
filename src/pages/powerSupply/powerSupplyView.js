@@ -43,7 +43,7 @@ const PowerSupplyView = () => {
     return (
         <>
             <div className="admin_page_top">
-                <h2>View PowerSupply</h2>
+                <h2>View Power Supply</h2>
                 <div>
                     <Button link='/powerSupply' iHeight='15px' class='btn-primary mx-3' icon={<i class="fa-solid fa-arrow-left"></i>} name='Back' />
                     <Button link={`/editPowerSupply/${params.id}`} iHeight='15px' class='btn-primary' icon={<i class="fa-solid fa-pen-to-square text-light"></i>} name='Update' />
@@ -51,8 +51,8 @@ const PowerSupplyView = () => {
             </div>
 
             <div className='w-100 d-flex justify-content-center '>
-                <div className="card w-50 overflow-hidden text-center rounded-4 ">
-                    <h1 >Distric </h1>
+                <div className="col-md-6 p-0 my-5 rounded-4 card col-sm-11 text-center py-5 m-2 box">
+                    {/* <h1 >Power Supply </h1> */}
                     <div className="row justify-content-center">
                         <div className="col-5 border-bottom text-capitalize" >
                             <h3> powerSupply Name</h3>

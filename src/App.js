@@ -41,6 +41,10 @@ import EditPowerSupply from './pages/powerSupply/editPowerSupply';
 import User from './pages/user/user';
 import AddUser from './pages/user/addUser';
 import UserView from './pages/user/userView';
+import EditUser from './pages/user/editUser';
+
+import Association from './pages/association/association';
+import EditAssociation from './pages/association/editAssociation';
 
 function App() {
 
@@ -112,7 +116,10 @@ function App() {
                   <Route path='/user' element={<User />} />
                   <Route path='/addUser' element={<AddUser />} />
                   <Route path='/userView/:id' element={<UserView />} />
+                  <Route path='/editUser/:id' element={<EditUser />} />
 
+                  <Route path='/association' element={<Association />} />
+                  <Route path='/editAssociation/:id' element={<EditAssociation />} />
 
                 </Route>
 

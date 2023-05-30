@@ -51,7 +51,7 @@ const BusinessView = () => {
             </div>
 
             <div className='w-100 d-flex justify-content-center '>
-                <div className="card w-50 overflow-hidden text-center rounded-4 ">
+                <div className="col-md-6 p-0 rounded-4 card col-sm-11 text-center py-5 m-2 box">
                     <h1 >BusinessType </h1>
                     <div className="row justify-content-center">
                         <div className="col-5 border-bottom text-capitalize" >
