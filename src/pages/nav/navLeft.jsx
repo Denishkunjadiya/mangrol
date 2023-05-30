@@ -40,6 +40,10 @@ const NavLeft = () => {
                 <ul className='menu'>
                     <li><Link to='/'><span><riIcon.RiDashboard3Fill /> </span>Dashboard</Link></li>
                     <li><Link to='/district'><span><faIcon.FaShieldAlt /></span>District</Link></li>
+                    <li><Link to='/taluka'><span><bsIcon.BsShield /></span>Taluka</Link></li>
+                    <li><Link to='/zone'><span><mdIcon.MdMyLocation /></span>Zone</Link></li>
+                    <li><Link to='/businessType'><span><biIcon.BiCategory /></span>Business Type</Link></li>
+                    <li><Link to='/powerSupply'><span><fiIcon.FiPower /></span>Power Supply</Link></li>
 
 
                     <li><Link to='/company'><span><bsIcon.BsFillBuildingsFill /> </span>Company</Link></li>

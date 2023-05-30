@@ -18,6 +18,26 @@ import AddDistrict from './pages/district/addDistrict';
 import DistrictView from './pages/district/districtView';
 import EditDistrict from './pages/district/editDistrict';
 
+import Taluka from './pages/taluka/taluka';
+import AddTaluka from './pages/taluka/addTaluka';
+import TalukaView from './pages/taluka/talukaView';
+import EditTaluka from './pages/taluka/editTaluka';
+
+import Zone from './pages/zone/zone';
+import ZoneView from './pages/zone/zoneView';
+import AddZone from './pages/zone/addZone';
+import EditZone from './pages/zone/editZone';
+
+import BusinessType from './pages/businessType/businessType';
+import AddBusinessType from './pages/businessType/addBusinessType';
+import BusinessView from './pages/businessType/businessView';
+import EditBusinessType from './pages/businessType/editBusinessType';
+
+import PowerSupply from './pages/powerSupply/powerSupply';
+import AddPowerSupply from './pages/powerSupply/addPowerSupply';
+import PowerSupplyView from './pages/powerSupply/powerSupplyView';
+import EditPowerSupply from './pages/powerSupply/editPowerSupply';
+
 function App() {
 
   const [sidebar, setSidebar] = useState(false)
@@ -65,10 +85,25 @@ function App() {
                   <Route path='/districtView/:id' element={<DistrictView />} />
                   <Route path='/editDistrict/:id' element={<EditDistrict />} />
 
-                  <Route path='/vehicle' element={<h1 >hello</h1>} />
-                  <Route path='/VehicleView/:id' element={<h1 >hello</h1>} />
-                  <Route path='/addVehicle' element={<h1 >hello</h1>} />
-                  <Route path='/updateVehicle' element={<h1 >hello</h1>} />
+                  <Route path='/taluka' element={<Taluka />} />
+                  <Route path='/addTaluka' element={<AddTaluka />} />
+                  <Route path='/talukaView/:id' element={<TalukaView />} />
+                  <Route path='/editTaluka/:id' element={<EditTaluka />} />
+
+                  <Route path='/zone' element={<Zone />} />
+                  <Route path='/addZone' element={<AddZone />} />
+                  <Route path='/zoneView/:id' element={<ZoneView />} />
+                  <Route path='/editZone/:id' element={<EditZone />} />
+
+                  <Route path='/businessType' element={<BusinessType />} />
+                  <Route path='/addBusinessType' element={<AddBusinessType />} />
+                  <Route path='/businessTypeView/:id' element={<BusinessView />} />
+                  <Route path='/editBusinessType/:id' element={<EditBusinessType />} />
+
+                  <Route path='/powerSupply' element={<PowerSupply />} />
+                  <Route path='/addPowerSupply' element={<AddPowerSupply />} />
+                  <Route path='/powerSupplyView/:id' element={<PowerSupplyView />} />
+                  <Route path='/editPowerSupply/:id' element={<EditPowerSupply />} />
 
                 </Route>
 

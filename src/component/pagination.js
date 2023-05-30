@@ -9,8 +9,8 @@ export default function Pagination({ cPage, pageCount, pageChange, recordPerPage
                     breakLabel="..."
                     nextLabel=">"
                     onPageChange={(e) => pageChange(e)}
-                    pageRangeDisplayed={2}
-                    // renderOnZeroPageCount={null}
+                    pageRangeDisplayed={1}
+                    renderOnZeroPageCount={null}
                     pageCount={pageCount}
                     initialPage={cPage - 1}
                     previousLabel="<"
