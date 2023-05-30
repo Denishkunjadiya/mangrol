@@ -44,6 +44,7 @@ const NavLeft = () => {
                     <li><Link to='/zone'><span><mdIcon.MdMyLocation /></span>Zone</Link></li>
                     <li><Link to='/businessType'><span><biIcon.BiCategory /></span>Business Type</Link></li>
                     <li><Link to='/powerSupply'><span><fiIcon.FiPower /></span>Power Supply</Link></li>
+                    <li><Link to='/user'><span><faIcon.FaRegUserCircle /></span>User</Link></li>
 
 
                     <li><Link to='/company'><span><bsIcon.BsFillBuildingsFill /> </span>Company</Link></li>

@@ -38,6 +38,10 @@ import AddPowerSupply from './pages/powerSupply/addPowerSupply';
 import PowerSupplyView from './pages/powerSupply/powerSupplyView';
 import EditPowerSupply from './pages/powerSupply/editPowerSupply';
 
+import User from './pages/user/user';
+import AddUser from './pages/user/addUser';
+import UserView from './pages/user/userView';
+
 function App() {
 
   const [sidebar, setSidebar] = useState(false)
@@ -104,6 +108,11 @@ function App() {
                   <Route path='/addPowerSupply' element={<AddPowerSupply />} />
                   <Route path='/powerSupplyView/:id' element={<PowerSupplyView />} />
                   <Route path='/editPowerSupply/:id' element={<EditPowerSupply />} />
+
+                  <Route path='/user' element={<User />} />
+                  <Route path='/addUser' element={<AddUser />} />
+                  <Route path='/userView/:id' element={<UserView />} />
+
 
                 </Route>
 
