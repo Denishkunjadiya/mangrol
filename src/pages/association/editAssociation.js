@@ -17,13 +17,20 @@ const EditAssociation = () => {
     const [city, setCity] = useState()
     const [pincode, setPinCode] = useState()
 
+    const [district, setDistrict] = useState()
+    const [taluka, setTaluka] = useState()
+
+    const [districtList, setDistrictList] = useState([])
+    const [talukaList, setTalukaList] = useState([])
+
 
     const editAssociation = async (e) => {
         e.preventDefault()
         const data = {
             _id: param.id,
             name: name,
-            phone_no: mobileNo
+            phone_no: mobileNo,
+
         }
 
         let result = await api('association/edit', data)
@@ -45,11 +52,24 @@ const EditAssociation = () => {
 
     // ----------------------setRecord
 
+    const District = async (e) => {
+        setDistrict(e.target.value)
+
+        let data = {
+            district: district
+        }
+
+        const setTaluka = await api('association/get_taluka_list', data)
+        setTalukaList(setTaluka.data.data)
+    }
+
     const setRecord = async () => {
 
 
         const result = await api('association/view')
-        console.log(result.data.data.association[0].address)
+
+        setDistrictList(result?.data?.data?.master?.district)
+
         setName(result.data?.data?.association[0].name)
         setEmail(result.data.data.association[0].email_id)
         setMobileNo(result.data.data.association[0].phone_no)
@@ -125,6 +145,34 @@ const EditAssociation = () => {
                         <label for="formGroupExampleInput" className="fs-4 mt-sm-2 mt-md-0 ">*pincode</label>
                         <input id='name' value={pincode} onChange={(e) => setPinCode(e.target.value)} placeholder='Enter User Name' type="text" />
                         {error?.name && <span className='error'>{error['name']}</span>}
+                    </div>
+                </div>
+                <div className="row  px-3 ">
+                    <div className="col-md-6 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">District select</label>
+                            <select onChange={District} class="form-control" id="exampleFormControlSelect1">
+                                <option selected disabled>Select District</option>
+                                {districtList.map((item, i) => {
+                                    return (
+                                        <option key={i + 1} value={item._id}> {item.name}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="col-md-6 ">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Taluka select</label>
+                            <select onChange={(e) => setTaluka(e.target.value)} class="form-control" id="exampleFormControlSelect1">
+                                <option selected disabled>Select Taluka</option>
+                                {talukaList.map((item, i) => {
+                                    return (
+                                        <option key={i + 1} value={item._id}> {item.name}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
                     </div>
                 </div>
 

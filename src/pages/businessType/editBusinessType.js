@@ -43,7 +43,6 @@ const EditBusinessType = () => {
     }
     useEffect(() => { displayBusinessType(); }, [parms.id])
 
-    console.log(businessType)
 
 
     return (

@@ -48,8 +48,6 @@ const Login = () => {
 
         let response = await api('auth/', data)
 
-        console.log(response)
-
         if (response && response.status === 200) {
             console.log("ok")
             navigate('/')
@@ -71,7 +69,6 @@ const Login = () => {
 
             const uid = result.user.auth.lastNotifiedUid
             const email = result.user.email
-            console.log(uid)
 
             let registerType = "gmail"
             let data = {

@@ -18,8 +18,6 @@ const Verify = () => {
 
         let respose = await api('company/login/verify', data)
 
-        console.log(respose)
-
         if (respose) {
             navigate('/signIn')
             localStorage.removeItem('email')

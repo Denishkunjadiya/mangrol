@@ -46,6 +46,9 @@ import EditUser from './pages/user/editUser';
 import Association from './pages/association/association';
 import EditAssociation from './pages/association/editAssociation';
 
+import Member from './pages/member/member';
+import AddMember from './pages/member/addMember';
+
 function App() {
 
   const [sidebar, setSidebar] = useState(false)
@@ -120,6 +123,10 @@ function App() {
 
                   <Route path='/association' element={<Association />} />
                   <Route path='/editAssociation/:id' element={<EditAssociation />} />
+
+                  <Route path='/member' element={<Member />} />
+                  <Route path='/addMember' element={<AddMember />} />
+
 
                 </Route>
 

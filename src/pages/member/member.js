@@ -7,8 +7,7 @@ import Pagination from '../../component/pagination'
 import * as luIcon from "react-icons/lu";
 import * as biIcon from "react-icons/bi";
 
-const District = () => {
-
+const Member = () => {
     let quePar = new URLSearchParams(window.location.search);
     let param = quePar.get('page_no')
     let iniPage = parseInt(param)
@@ -19,44 +18,41 @@ const District = () => {
 
     let pageCount = Math.ceil(tRecord / recPerPage)
 
-    const [district, setDistrict] = useState([])
+    const [member, setMember] = useState([])
     let [sortBy, setSortBy] = useState('')
     let [sortType, setSortType] = useState(-1)
 
-    let [name, setName] = useState('')
     let [status, setStatus] = useState('')
 
 
-    const showDistrict = async (pageNo) => {
+    const showMember = async (pageNo) => {
 
         let data = {
             skip_number: (pageNo - 1) * recPerPage,
             record_per_page: recPerPage,
             sort_by: sortBy,
             sort_type: sortType,
-            name: name,
             status: status
         }
 
-        let result = await api('master/district/', data)
+        let result = await api('member/', data)
         if (result && result.status === 200) {
             if (result?.data?.total_records) {
                 setTRecord(result?.data?.total_records)
             }
-            setDistrict(result?.data?.data)
+            setMember(result?.data?.data)
         }
     }
-
     useEffect(() => {
         setCpage(cPage)
-        showDistrict(!param ? param : 1)
+        showMember(!param ? param : 1)
     }, [recPerPage])
 
     // ----------------- page Change
 
     const pageChange = async (page) => {
         let cPage = page.selected + 1;
-        showDistrict(cPage)
+        showMember(cPage)
         window.history.replaceState({}, '', window.location.pathname + '?page_no=' + cPage)
     }
 
@@ -70,10 +66,10 @@ const District = () => {
             _id: item._id,
             status: (!item.status)
         }
-        const result = await api('master/district/status', data)
+        const result = await api('member/status', data)
 
         if (result && result.status === 200) {
-            showDistrict()
+            showMember()
             setStatus('')
         }
 
@@ -91,7 +87,7 @@ const District = () => {
         }
         setSortBy(sortBy);
         setSortType(sortType)
-        showDistrict()
+        showMember()
     }
     const getIcon = (key) => {
         if (key === sortBy && sortType == 1) {
@@ -109,30 +105,42 @@ const District = () => {
     return (
         <div>
             <div className="admin_page_top " >
-                <h2>District</h2>
-                <Button link='/addDistrict' iHeight='15px' class='btn-primary' icon={<i class="fa-solid fa-plus"></i>} name='Add' />
+                <h2>Member</h2>
+                <Button link='/addMember' iHeight='15px' class='btn-primary' icon={<i class="fa-solid fa-plus"></i>} name='Add' />
             </div>
 
             <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th style={{ cursor: "pointer", userSelect: 'none' }} onClick={() => sort("name")}>Name {getIcon('name')}</th>
+                        <th style={{ cursor: "pointer", userSelect: 'none' }} onClick={() => sort("company_name")}>company Name {getIcon('company_name')}</th>
+                        <th style={{ cursor: "pointer", userSelect: 'none' }} onClick={() => sort('membership_no')}>Membership No{getIcon('membership_no')}</th>
+                        <th style={{ cursor: "pointer", userSelect: 'none' }} onClick={() => sort('mobile_no')}>Mobile No{getIcon('mobile_no')}</th>
+                        <th style={{ cursor: "pointer", userSelect: 'none' }} onClick={() => sort('business_types')}>Business Types{getIcon('business_types')}</th>
+                        <th style={{ cursor: "pointer", userSelect: 'none' }} onClick={() => sort('renewal_date')}>Renewal Date{getIcon('renewal_date')}</th>
+                        <th style={{ cursor: "pointer", userSelect: 'none' }} onClick={() => sort('factory_address.taluka')}>Taluka{getIcon('factory_address.taluka')}</th>
+                        <th style={{ cursor: "pointer", userSelect: 'none' }} onClick={() => sort('factory_address.district')}>District{getIcon('factory_address.district')}</th>
                         <th style={{ cursor: "pointer", userSelect: 'none' }} onClick={() => sort('status')}>Status{getIcon('status')}</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {district.map((item, index) => {
+                    {member.map((item, index) => {
                         return (
                             <tr>
                                 <td>{index + 1}</td>
-                                <td>{item.name}</td>
+                                <td>{item.company_name}</td>
+                                <td>{item.membership_no}</td>
+                                <td>{item.mobile_no}</td>
+                                <td>{item.business_types.name}</td>
+                                <td>{item.renewal_date}</td>
+                                <td>{item.factory_address.taluka.name}</td>
+                                <td>{item.factory_address.district.name}</td>
                                 <td style={{ cursor: "pointer" }} className='fs-3' onClick={() => handleStatus(item)}>
                                     {item.status === true ? <i style={{ color: "#07bc0c" }} className="fa-solid fa-circle-check"></i> : <i className="fa-solid fa-circle-xmark" style={{ color: "#ff0000", }} ></i>}
                                 </td>
                                 <td className='fs-3'>
-                                    <Link to={`/districtView/${item._id}`}><i class="fa-regular fa-eye"></i></Link>
+                                    <Link to={`/memberView/${item._id}`}><i class="fa-regular fa-eye"></i></Link>
                                 </td>
                             </tr>
                         )
@@ -144,4 +152,4 @@ const District = () => {
     )
 }
 
-export default District
+export default Member

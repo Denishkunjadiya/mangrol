@@ -45,6 +45,7 @@ const NavLeft = () => {
                     <li><Link to='/businessType'><span><biIcon.BiCategory /></span>Business Type</Link></li>
                     <li><Link to='/powerSupply'><span><fiIcon.FiPower /></span>Power Supply</Link></li>
                     <li><Link to='/association'><span><biIcon.BiSitemap /></span>Association</Link></li>
+                    <li><Link to='/member'><span><faIcon.FaUserFriends /></span>Member</Link></li>
 
                     <li><Link to='/user'><span><faIcon.FaRegUserCircle /></span>User</Link></li>
 

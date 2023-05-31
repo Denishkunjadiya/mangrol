@@ -51,7 +51,6 @@ const Dashboard = () => {
 
     const showUser = async () => {
         const result = await api('user/')
-        console.log(result)
         setUser(result?.data?.total_records)
     }
 
