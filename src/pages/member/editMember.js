@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import Button from '../../component/button';
-import { api } from '../../services/api';
+import { api } from '../../services/api'
+import { Link, useNavigate } from 'react-router-dom'
+import Button from '../../component/button'
+import { useParams } from 'react-router-dom'
 import { resetError, showError } from '../../services/error';
-import Joi from 'joi';
+
+
 import * as faIcon from "react-icons/fa";
+import moment from 'moment'
 
 
-const AddMember = () => {
+const EditMember = () => {
+    const parms = useParams()
+    const navigate = useNavigate()
 
-
-    const [formNo, setformNo] = useState()
     const [companyName, setCompanyName] = useState()
     const [representative, setRepresentative] = useState([{
         name: '',
@@ -47,19 +51,10 @@ const AddMember = () => {
 
     let [error, setError] = useState({})
 
-    const validate = (data) => {
-        const schema = Joi.object({
-            member: Joi.string().max(50).required().label('name')
-        });
-        return schema.validate(data, { abortEarly: false, allowUnknown: true });
-    };
-
     const cDate = new Date()
     const date = `${cDate.getFullYear()}-${cDate.getMonth() + 1}-${cDate.getDate()}`
 
-
-    const addMember = async (e) => {
-        resetError();
+    const editMember = async (e) => {
         e.preventDefault()
 
         const factoryAddress = {
@@ -70,7 +65,9 @@ const AddMember = () => {
             taluka: taluka,
             district: district
         }
-        const data = {
+
+        let data = {
+            _id: parms.id,
             date,
             company_name: companyName,
             form_no: "form_no",
@@ -91,45 +88,53 @@ const AddMember = () => {
             power_supply: powerSupply,
             remark: remark,
             renewal_date: renewalDate,
-
         }
 
-        const { error } = validate(data)
-        if (error) showError(error.details);
+        let result = await api('member/edit', data)
+        console.log(result)
 
-        let result = await api('member/add', data)
         if (result && result.status === 200) {
-            setZone('')
-            setBlockNo('')
-            setPloatkNo('')
-            setEState('')
-            setGramPanchayat('')
-            setTaluka('')
-            setDistrict('')
-            setOfficeAddress('')
-            setMobileNo('')
-            setaltMobileNo('')
-            setEmailId('')
-            setGstNo('')
-            setBusinessTypes('')
-            setWebsite('')
-            setNoOfMachine('')
-            setMaleWorkers('')
-            setFemaleWorkers('')
-            settotalWorkers('')
-            setPowerSupply('')
-            setRemark('')
-            setRenewalDate('')
+            navigate(`/memberView/${parms.id}`)
+        }
+
+    }
+
+    // ----------- set data
+    console.log(zone)
+    const viewMember = async () => {
+        let data = {
+            _id: parms.id
+        }
+        let result = await api('member/view', data)
+        if (result && result.status === 200) {
+            setCompanyName(result?.data?.data?.company_name)
+            setZone(result?.data?.data?.zone?._id)
+            setBlockNo(result?.data?.data?.factory_address?.block_no)
+            setPloatkNo(result?.data?.data?.factory_address?.plot_no)
+            setEState(result?.data?.data?.factory_address?.estate)
+            setGramPanchayat(result?.data?.data?.factory_address?.gram_panchayat)
+            setTaluka(result?.data?.data?.factory_address?.taluka._id)
+            setDistrict(result?.data?.data?.factory_address?.district._id)
+            setOfficeAddress(result?.data?.data?.office_address)
+            setMobileNo(result?.data?.data?.mobile_no)
+            setaltMobileNo(result?.data?.data?.alt_mobile_no)
+            setEmailId(result?.data?.data?.email_id)
+            setGstNo(result?.data?.data?.gst_no)
+            setBusinessTypes(result?.data?.data?.business_types?._id)
+            setWebsite(result?.data?.data?.website)
+            setNoOfMachine(result?.data?.data?.no_of_machine)
+            setMaleWorkers(result?.data?.data?.male_workers)
+            setFemaleWorkers(result?.data?.data?.female_workers)
+            settotalWorkers(result?.data?.data?.total_workers)
+            setPowerSupply(result?.data?.data?.power_supply?._id)
+            setRemark(result?.data?.data?.remark)
+            setRenewalDate(moment(result?.data?.data?.renewal_date).format('YYYY-MM-DD'))
+            setRepresentative(result.data.data?.representative)
 
         }
+
     }
 
-    const oncancel = (e) => {
-        e.preventDefault();
-        resetError();
-
-        setCompanyName('')
-    }
     // ---------------------- get data
 
     const dataList = async () => {
@@ -143,10 +148,13 @@ const AddMember = () => {
             setPowerSupplyList(result?.data?.master?.power_supplys)
         }
     }
+    // --------------------------
 
     useEffect(() => {
         dataList()
+        viewMember()
     }, [])
+
 
     // ---------------------- Add represenative
     const addrepresentative = () => {
@@ -163,15 +171,16 @@ const AddMember = () => {
         setRepresentative(list);
     };
 
+
     return (
-        <>
+        <div>
             <div className="row my-2  justify-content-end align-items-center">
                 <div className="col-6">
-                    <h2>Add Member</h2>
+                    <h2>Edit Member</h2>
                 </div>
 
                 <div className="col-6">
-                    <Button icon={<i class="fa-solid fa-arrow-left"></i>} name='Back' link='/member' class='px-4 btn-primary float-end' />
+                    <Button icon={<i class="fa-solid fa-arrow-left"></i>} name='Back' link={'/memberView/' + parms.id} class='px-4 btn-primary float-end' />
                 </div>
             </div>
 
@@ -199,10 +208,10 @@ const AddMember = () => {
                             <>
                                 <div className="row d-flex align-items-center ">
                                     <div className="col-md-5 mb-3">
-                                        <input type="text" onChange={(e) => handleChange(index, e)} name='name' id={`representative_${index}_name`} placeholder={`(${index + 1}) name`} />
+                                        <input type="text" onChange={(e) => handleChange(index, e)} value={data.name} name='name' id={`representative_${index}_name`} placeholder={`(${index + 1}) name`} />
                                     </div>
                                     <div className="col-md-5">
-                                        <input type="text" onChange={(e) => handleChange(index, e)} name='designation' id={`representative_${index}_designation`} placeholder="Designation" />
+                                        <input type="text" onChange={(e) => handleChange(index, e)} value={data.designation} name='designation' id={`representative_${index}_designation`} placeholder="Designation" />
                                     </div>
                                     <div className="col-md-2 text-right fs-2">
                                         <button type="button" onClick={removeInputFields} style={{ border: "none", background: "none", color: "red" }} >
@@ -221,7 +230,7 @@ const AddMember = () => {
 
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">select Zone</label>
-                            <select onChange={(e) => setZone(e.target.value)} class="form-control" id="exampleFormControlSelect1">
+                            <select value={zone} onChange={(e) => setZone(e.target.value)} class="form-control" id="exampleFormControlSelect1">
                                 <option selected disabled>---Select Zone----</option>
                                 {zoneList.map((item, i) => {
                                     return (
@@ -399,23 +408,24 @@ const AddMember = () => {
                     </div>
                 </div>
 
-                {/* ------------- */}
 
                 <div className="row  px-3 ">
                     <div className="col-md-6 my-3">
-                        <button style={{ letterSpacing: '2px' }} className='btn btn-primary' onClick={addMember} >
-                            Add
+                        <button style={{ letterSpacing: '2px' }} className='btn btn-primary' onClick={editMember} >
+                            Edit
                         </button>
-                        <button style={{ letterSpacing: '2px' }} className=' btn mx-3 btn-light' onClick={oncancel} >
-                            Cancel
-                        </button>
+                        <Link to={"/memberView/" + parms.id}>
+                            <button style={{ letterSpacing: '2px' }} className=' btn mx-3 btn-light' onClick={oncancel} >
+                                Cancel
+                            </button>
+                        </Link>
                     </div>
                 </div>
 
             </form>
 
-        </>
+        </div>
     )
 }
 
-export default AddMember
+export default EditMember

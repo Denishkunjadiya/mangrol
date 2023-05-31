@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom'
 
 const EditZone = () => {
     const parms = useParams()
-    const [zone, setZone] = useState([])
     const navigate = useNavigate()
+    const [zone, setZone] = useState([])
 
     const editZone = async (e) => {
         e.preventDefault()

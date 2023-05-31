@@ -48,13 +48,6 @@ const NavLeft = () => {
                     <li><Link to='/member'><span><faIcon.FaUserFriends /></span>Member</Link></li>
 
                     <li><Link to='/user'><span><faIcon.FaRegUserCircle /></span>User</Link></li>
-
-                    <hr />
-                    <li><Link to='/company'><span><bsIcon.BsFillBuildingsFill /> </span>Company</Link></li>
-                    <li><Link to='/expense'><span><giIcon.GiExpense /></span>expense</Link></li>
-                    <li><Link to='/expenseCategory'><span><biIcon.BiCategory /></span>expenseCategory</Link></li>
-                    <li><Link to='/customer'><span><faIcon.FaUserFriends /></span>customer</Link></li>
-                    <li><Link to='/site'><span><biIcon.BiSitemap /></span>site</Link></li>
                 </ul>
 
             </nav>

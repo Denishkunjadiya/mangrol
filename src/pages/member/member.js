@@ -6,6 +6,7 @@ import Pagination from '../../component/pagination'
 
 import * as luIcon from "react-icons/lu";
 import * as biIcon from "react-icons/bi";
+import moment from 'moment/moment'
 
 const Member = () => {
     let quePar = new URLSearchParams(window.location.search);
@@ -133,7 +134,7 @@ const Member = () => {
                                 <td>{item.membership_no}</td>
                                 <td>{item.mobile_no}</td>
                                 <td>{item.business_types.name}</td>
-                                <td>{item.renewal_date}</td>
+                                <td>{moment(item.renewal_date).format('DD-MM-YYYY')}</td>
                                 <td>{item.factory_address.taluka.name}</td>
                                 <td>{item.factory_address.district.name}</td>
                                 <td style={{ cursor: "pointer" }} className='fs-3' onClick={() => handleStatus(item)}>

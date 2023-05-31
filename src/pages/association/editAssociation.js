@@ -26,11 +26,21 @@ const EditAssociation = () => {
 
     const editAssociation = async (e) => {
         e.preventDefault()
+        const address = {
+            address_line_1: add1,
+            address_line_2: add2,
+            pincode: pincode,
+            city: city,
+            taluka: taluka,
+            district: district,
+        }
+
         const data = {
             _id: param.id,
             name: name,
+            email_id: email,
             phone_no: mobileNo,
-
+            address: address
         }
 
         let result = await api('association/edit', data)
@@ -77,7 +87,8 @@ const EditAssociation = () => {
         setAdd2(result.data.data.association[0].address.address_line_2)
         setCity(result.data.data.association[0].address.city)
         setPinCode(result.data.data.association[0].address.pincode)
-
+        setTaluka(result.data.data?.association[0]?.address)
+        setDistrict(result.data.data?.association[0])
     }
 
     useEffect(() => {
@@ -164,6 +175,7 @@ const EditAssociation = () => {
                     <div className="col-md-6 ">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Taluka select</label>
+                            {console.log(district)}
                             <select onChange={(e) => setTaluka(e.target.value)} class="form-control" id="exampleFormControlSelect1">
                                 <option selected disabled>Select Taluka</option>
                                 {talukaList.map((item, i) => {
@@ -179,7 +191,7 @@ const EditAssociation = () => {
                 <div className="row  px-3 ">
                     <div className="col-md-6 my-3">
                         <button style={{ letterSpacing: '2px' }} className='btn btn-primary' onClick={editAssociation} >
-                            Add
+                            Edit
                         </button>
                         <button style={{ letterSpacing: '2px' }} className=' btn mx-3 btn-light' onClick={oncancel} >
                             Cancel

@@ -48,6 +48,8 @@ import EditAssociation from './pages/association/editAssociation';
 
 import Member from './pages/member/member';
 import AddMember from './pages/member/addMember';
+import MemberView from './pages/member/memberView';
+import EditMember from './pages/member/editMember';
 
 function App() {
 
@@ -126,6 +128,8 @@ function App() {
 
                   <Route path='/member' element={<Member />} />
                   <Route path='/addMember' element={<AddMember />} />
+                  <Route path='/memberView/:id' element={<MemberView />} />
+                  <Route path='/editMember/:id' element={<EditMember />} />
 
 
                 </Route>
